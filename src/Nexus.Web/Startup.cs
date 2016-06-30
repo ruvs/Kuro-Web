@@ -20,6 +20,8 @@ namespace Nexus.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            //app.Map("/api/participant", partLibApp => partLibApp.UseParticipantLibraryCore());
+
             app.UseStaticFiles();
 
             app.Run(ctx =>
@@ -28,10 +30,36 @@ namespace Nexus.Web
                 return Task.FromResult(0);
             });
 
+            //var logWriter = new EndorsementCatalogLogger();
+            //var claimsPrincipalResolver = new ClaimsPrincipalResolver();
+
+            //BootStrapEndorsementCatalogLibrary(logWriter, claimsPrincipalResolver);
+            //BootStrapDocFactory(logWriter);
+
+            //BootStrapApplicabilityQueryEngine(logWriter);
+            //BootStrapApplicabilityConfigEngine(logWriter);
+
+            //app.Map("/api/endorsement", endorsementCatalogLibraryApp =>
+            //    endorsementCatalogLibraryApp.UseEndorsementCatalogLibraryCore(_catalogLibrary,
+            //        logWriter));
+
+
             //app.Run(async (context) =>
             //{
             //    await context.Response.WriteAsync("Hello World!");
             //});
         }
+
+        //private static void BootStrapEndorsementCatalogLibrary(Beazley.EndorsementCatalog.Core.Logging.IEndorsementCatalogLogger logWriter,
+        //    Beazley.EndorsementCatalog.Core.Security.IResolveClaimsPrincipal claimsPrincipalResolver)
+        //{
+        //    _catalogLibrary = EndorsementCatalogConfigure
+        //        .Init()
+        //        .With(logWriter)
+        //        .With(claimsPrincipalResolver)
+        //        .DapperPersistence()
+        //        .WithConnectionsNamed("ApplicationStore", "ApplicationStore")
+        //        .Build();
+        //}
     }
 }
