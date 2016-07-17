@@ -7,7 +7,14 @@
     var map = {
         'app': 'app', // 'dist',
         '@angular': 'lib/@angular',
-        'rxjs': 'lib/rxjs'
+        'rxjs': 'lib/rxjs',
+        '@angular/router': 'lib/@angular/router/bundles',
+        '@angular/platform-browser': 'lib/@angular/platform-browser/bundles',
+        '@angular/platform-browser-dynamic': 'lib/@angular/platform-browser-dynamic/bundles',
+        '@angular/core': 'lib/@angular/core/bundles',
+        '@angular/common': 'lib/@angular/common/bundles',
+        '@angular/compiler': 'lib/@angular/compiler/bundles'
+
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
