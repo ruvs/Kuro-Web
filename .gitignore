@@ -3,7 +3,6 @@
 
 src/Nexus.Web/wwwroot/app/
 src/Nexus.Web/wwwroot/lib/
-!src/Nexus.Web/wwwroot/app/**/*.html
 
 
 # User-specific files

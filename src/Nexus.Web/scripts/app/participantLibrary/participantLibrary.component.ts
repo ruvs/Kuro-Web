@@ -2,7 +2,6 @@
 
 @Component({
     selector: 'mytest',
-    templateUrl: 'participantLibrary/participant-library.component.html'
+    templateUrl: 'app/participantLibrary/participantLibrary.component.html'
 })
 export class ParticipantLibraryComponent { }
-

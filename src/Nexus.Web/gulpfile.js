@@ -1,7 +1,13 @@
-﻿/*
+﻿/// <binding AfterBuild='watch' Clean='clean' />
+/*
 This file in the main entry point for defining Gulp tasks and using Gulp plugins.
 Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 */
+var scriptsSource = "./scripts/";
+var scriptsDest = "./wwwroot";
+
+//var sassSource = "./sass/";
+//var sassDest = "./wwwroot/css";
 
 var gulp = require('gulp'),
     Q = require('q'),
@@ -36,6 +42,23 @@ gulp.task('copy:lib', ['clean'], function () {
     });
 
     return Q.all(promises);
+});
+
+gulp.task("html", function () {
+    gulp.src(scriptsSource + "**/*.html")
+        .pipe(gulp.dest(scriptsDest));
+});
+
+
+//gulp.task("sass", function () {
+//    return gulp.src(sassSource + "MovieStyles.scss")
+//    .pipe(sass().on("error", sass.logError))
+//    .pipe(gulp.dest(sassDest));
+//});
+
+gulp.task("watch", function () {
+    gulp.watch(scriptsSource + "**/*.html", ["html"]);
+    //gulp.watch(sassSource + "**/*.scss", ["sass"]);
 });
 
 //gulp.task('default', function () {
