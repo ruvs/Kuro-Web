@@ -1,1 +1,13 @@
 ﻿<h2>Participant Library</h2>
+
+<table>
+    <tr *ngFor='let pli of participantLibraryItems'>
+        <td>
+            <a [routerLink]="['/participantLibrary', pli.id]">
+                {{pli.title}}
+            </a>
+        </td>
+        <td>{{ pli.title | uppercase }}</td>
+        <td>{{ pli.completed }}</td>
+    </tr>
+</table>

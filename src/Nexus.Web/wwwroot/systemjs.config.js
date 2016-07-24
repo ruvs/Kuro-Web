@@ -12,6 +12,7 @@
         '@angular/platform-browser': 'lib/@angular/platform-browser/bundles',
         '@angular/platform-browser-dynamic': 'lib/@angular/platform-browser-dynamic/bundles',
         '@angular/core': 'lib/@angular/core/bundles',
+        '@angular/http': 'lib/@angular/http/bundles',
         '@angular/common': 'lib/@angular/common/bundles',
         '@angular/compiler': 'lib/@angular/compiler/bundles'
 
