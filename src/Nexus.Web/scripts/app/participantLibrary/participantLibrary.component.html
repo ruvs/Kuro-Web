@@ -1,13 +1,100 @@
-﻿<h2>Participant Library</h2>
+﻿
+<div class="container">
 
-<table>
-    <tr *ngFor='let pli of participantLibraryItems'>
-        <td>
-            <a [routerLink]="['/participantLibrary', pli.id]">
-                {{pli.title}}
-            </a>
-        </td>
-        <td>{{ pli.title | uppercase }}</td>
-        <td>{{ pli.completed }}</td>
-    </tr>
-</table>
+<h2>Participant Library</h2>
+
+    <div class="panel-group" id="accordion">
+        <!-- accordion 1 -->
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">
+                <!-- panel-heading -->
+                <h4 class="panel-title">
+                    <!-- title 1 -->
+                    <a data-toggle="collapse" data-parent="#accordion" href="#accordionOne">
+                        Collapsible Accordion 1
+                    </a>
+                </h4>
+            </div>
+            <!-- panel body -->
+            <div id="accordionOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <table>
+                        <tr *ngFor='let pli of participantLibraryItems'>
+                            <td>
+                                <a [routerLink]="['/participantLibrary', pli.id]">
+                                    {{pli.title}}
+                                </a>
+                            </td>
+                            <td>{{ pli.title | uppercase }}</td>
+                            <td>{{ pli.completed }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-success">
+            <!-- accordion 2 -->
+
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <!-- title 2 -->
+                    <a data-toggle="collapse" data-parent="#accordion" href="#accordionTwo">
+                        Collapsible Accordion 2
+                    </a>
+                </h4>
+            </div>
+            <!-- panel body -->
+            <div id="accordionTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table>
+                        <tr *ngFor='let pli of participantLibraryItems'>
+                            <td>
+                                <a [routerLink]="['/participantLibrary', pli.id]">
+                                    {{pli.title}}
+                                </a>
+                            </td>
+                            <td>{{ pli.title | uppercase }}</td>
+                            <td>{{ pli.completed }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-warning">
+            <!-- accordion 3 -->
+
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <!-- title 3 -->
+                    <a data-toggle="collapse" data-parent="#accordion" href="#accordionThree">
+                        Collapsible Accordion 3
+                    </a>
+                </h4>
+            </div>
+
+            <div id="accordionThree" class="panel-collapse collapse">
+                <!-- panel body -->
+                <div class="panel-body">
+                    <table>
+                        <tr *ngFor='let pli of participantLibraryItems'>
+                            <td>
+                                <a [routerLink]="['/participantLibrary', pli.id]">
+                                    {{pli.title}}
+                                </a>
+                            </td>
+                            <td>{{ pli.title | uppercase }}</td>
+                            <td>{{ pli.completed }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
