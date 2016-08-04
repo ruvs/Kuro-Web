@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { ParticipantLibraryComponent } from './participantLibrary/participantLibrary.component';
 
 export const routes: RouterConfig = [
+    { path: '', component: AppComponent },
     { path: 'participantLibrary', component: ParticipantLibraryComponent },
     { path: 'participantLibrary/:id', component: ParticipantLibraryComponent }
 ];

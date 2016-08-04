@@ -9,7 +9,8 @@ import { IParticipantLibraryItem } from './participantLibraryItem';
 
 @Injectable()
 export class ParticipantLibraryService {
-    private _participantLibraryItems = 'https://jsonplaceholder.typicode.com/todos';
+    //private _participantLibraryItems = 'https://jsonplaceholder.typicode.com/todos';
+    private _participantLibraryItems = 'http://localhost:5793/api/participantLibrary/participants';
 
     constructor(private _http: Http) { }
 
