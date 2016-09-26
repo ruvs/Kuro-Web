@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, Inject } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -6,18 +6,40 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
 import { IParticipantLibraryItem } from './participantLibraryItem';
+import { IParticipantLibraryItemType } from './participantLibraryItemType';
+import { AppConstants } from './../helpers/appConstants';
 
 @Injectable()
 export class ParticipantLibraryService {
-    //private _participantLibraryItems = 'https://jsonplaceholder.typicode.com/todos';
-    private _participantLibraryItems = 'http://localhost:5793/api/participantLibrary/participants';
-
-    constructor(private _http: Http) { }
+    private _participantLibraryItems;
+    private _participantLibraryItemTypes;
+    private _participantLibraryItemsByType;
+    
+    constructor(private _http: Http,
+        private _appConstants: AppConstants) {
+        this._participantLibraryItemTypes = _appConstants.BASE_URL +        'api/participantLibrary/participants/types';
+        this._participantLibraryItems = _appConstants.BASE_URL +            'api/participantLibrary/participants';
+        this._participantLibraryItemsByType = _appConstants.BASE_URL +      'api/participantLibrary/participants/byType/';
+    }
 
     getParticipantLibraryItems(): Observable<IParticipantLibraryItem[]> {
         return this._http.get(this._participantLibraryItems)
             .map((response: Response) => <IParticipantLibraryItem[]>response.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            //.do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
+    getParticipantLibraryItemTypes(): Observable<IParticipantLibraryItemType[]> {
+        return this._http.get(this._participantLibraryItemTypes)
+            .map((response: Response) => <IParticipantLibraryItemType[]>response.json())
+            //.do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
+    getParticipantLibraryItemsByType(typeKey: string): Observable<IParticipantLibraryItem[]> {
+        return this._http.get(this._participantLibraryItemsByType + typeKey)
+            .map((response: Response) => <IParticipantLibraryItem[]>response.json())
+            //.do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
 

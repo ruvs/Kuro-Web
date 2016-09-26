@@ -10,12 +10,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Nexus.ParticipantLibrary.Middleware.Configuration;
 using Nexus.Web.Configuration;
+using Nexus.ParticipantLibrary.Core.Logging;
+using Nexus.ParticipantLibrary.Core.Configuration;
+using Nexus.ParticipantLibrary.Data._Config;
+using Nexus.Web.Infrastructure;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace Nexus.Web
 {
     public class Startup
     {
+        private static IAmAParticipantLibrary participantLibrary;
+        private static ParticipantLibraryAppSettings participantLibraryAppSettings;
+
         public IConfiguration Configuration { get; set; }
 
         public Startup(IHostingEnvironment env)
@@ -40,7 +47,7 @@ namespace Nexus.Web
             services.Configure<AppSettings>(Configuration.GetSection("MyAppSettings:ParticipantLibrary"));
 
             // *If* you need access to generic IConfiguration this is **required**
-            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton(Configuration);
 
             //services.AddDataProtection();
         }
@@ -48,22 +55,24 @@ namespace Nexus.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            participantLibraryAppSettings = BootStrapParticipantLibraryAppSettings(app);
+
+            var logWriter = new ParticipantLibraryLogger();
+
+            BootStrapParticipantLibrary(logWriter);
+
+            app.UseDeveloperExceptionPage();
             app.UseAppBuilder(appBuilder =>
             {
                 // Some components will have dependencies that you need to populate in the IAppBuilder.Properties.
                 // Here's one example that maps the data protection infrastructure.
                 //appBuilder.SetDataProtectionProvider(app);
-
-                appBuilder.Map("/api/participantLibrary", partLibApp => partLibApp.UseParticipantLibraryCore(BootStrapParticipantLibraryAppSettings(app)));
-                //appBuilder.Run(context =>
-                //{
-                //    return context.Response.WriteAsync("Hello from IAppBuilder middleware.");
-                //});
+                //app.Map("/api/participantLibrary", partLibApp => partLibApp.UseParticipantLibraryCore(BootStrapParticipantLibraryAppSettings(app)));
+                appBuilder.Map("/api/participantLibrary", partLibApp => partLibApp.UseParticipantLibraryCore(participantLibraryAppSettings, participantLibrary));
             });
 
-            //app.Map("/api/participantLibrary", partLibApp => partLibApp.UseParticipantLibraryCore());
-
             //app.UseWebApi();// UseStaticFiles();
+
 
             app.Run(ctx =>
             {
@@ -91,24 +100,41 @@ namespace Nexus.Web
             //});
         }
 
-        private static IAppSettings BootStrapParticipantLibraryAppSettings(IApplicationBuilder app)
+        private static ParticipantLibraryAppSettings BootStrapParticipantLibraryAppSettings(IApplicationBuilder app)
         {
             var appSettings = app.ApplicationServices.GetService<IOptions<AppSettings>>();
-            var participantLibraryAppSettings = new ParticipantLibraryAppSettings();
-            participantLibraryAppSettings.CorsOrigins = appSettings.Value.CorsOrigins;
+            participantLibraryAppSettings = new ParticipantLibraryAppSettings()
+            {
+                CorsOrigins = appSettings.Value.CorsOrigins,
+                IncludeErrorDetailPolicy = appSettings.Value.IncludeErrorDetailPolicy,
+                ConnectionString_ParticipantLibrary_Read = appSettings.Value.ConnectionString_ParticipantLibrary_Read,
+                ConnectionString_ParticipantLibrary_Write = appSettings.Value.ConnectionString_ParticipantLibrary_Write
+            };
             return participantLibraryAppSettings;
         }
 
-        //private static void BootStrapEndorsementCatalogLibrary(Beazley.EndorsementCatalog.Core.Logging.IEndorsementCatalogLogger logWriter,
-        //    Beazley.EndorsementCatalog.Core.Security.IResolveClaimsPrincipal claimsPrincipalResolver)
-        //{
-        //    _catalogLibrary = EndorsementCatalogConfigure
-        //        .Init()
-        //        .With(logWriter)
-        //        .With(claimsPrincipalResolver)
-        //        .DapperPersistence()
-        //        .WithConnectionsNamed("ApplicationStore", "ApplicationStore")
-        //        .Build();
-        //}
+        private static void BootStrapParticipantLibrary(IParticipantLibraryLogger logWriter)
+            //Beazley.EndorsementCatalog.Core.Security.IResolveClaimsPrincipal claimsPrincipalResolver)
+        {
+            participantLibrary = ParticipantLibraryConfigure
+                .Init()
+                .With(logWriter)
+                .EfPersistence()
+                .WithConnectionStrings(participantLibraryAppSettings.ConnectionString_ParticipantLibrary_Read, participantLibraryAppSettings.ConnectionString_ParticipantLibrary_Write)
+                //.With(claimsPrincipalResolver)
+                .Build();
+        }
+
+        private class ParticipantLibraryLogger : IParticipantLibraryLogger
+        {
+            //private readonly ILogWriter logger = new LogWriter(new LogFormatter());
+            private readonly ILogWriter logger = new LogWriter();
+
+            public void Error(string message)
+            {
+                //logger.Error(EventIds.ENDORSEMENT_API_ERROR_GENERAL, message);
+            }
+        }
+
     }
 }

@@ -1,0 +1,25 @@
+﻿
+<div class="container">
+
+<h2>Participant Library</h2>
+
+    <div class="panel-group" id="accordion">
+
+        <div  *ngFor="let plit of participantLibraryItemTypes" class="panel panel-primary">
+
+            <div class="panel-heading">
+                <!-- panel-heading -->
+                <h4 class="panel-title">
+                    <!-- title 1 -->
+                    <a data-toggle="collapse" data-parent="#accordion" href="#accordion_{{plit.NexusKey}}">
+                        {{plit.DisplayName}}
+                    </a>
+                </h4>
+            </div>
+
+            <participantLibraryItemsByType [typeKey]="plit.NexusKey"></participantLibraryItemsByType>
+
+        </div>
+    </div>
+
+</div>

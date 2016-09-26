@@ -1,6 +1,11 @@
 ﻿export interface IParticipantLibraryItem {
-    userId: number;
-    id: number;
-    title: string;
-    completed: boolean;
+    NexusKey: string;
+    Id: number;
+    Name: string;
+    DisplayCode: string;
+    DisplayName: string;
+    Iso2Code: string;
+    Iso3Code: string;
+    TypeKey: string;
+    TypeName: string;
 }

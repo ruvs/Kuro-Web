@@ -1,11 +1,11 @@
 ﻿import { provideRouter, RouterConfig } from '@angular/router';
 import { AppComponent } from './app.component';
-import { ParticipantLibraryComponent } from './participantLibrary/participantLibrary.component';
+import { ParticipantLibraryListComponent } from './participantLibrary/ParticipantLibraryList.component';
 
 export const routes: RouterConfig = [
     { path: '', component: AppComponent },
-    { path: 'participantLibrary', component: ParticipantLibraryComponent },
-    { path: 'participantLibrary/:id', component: ParticipantLibraryComponent }
+    { path: 'participantLibrary', component: ParticipantLibraryListComponent },
+    { path: 'participantLibrary/:id', component: ParticipantLibraryListComponent }
 ];
 
 export const appRouterProviders = [

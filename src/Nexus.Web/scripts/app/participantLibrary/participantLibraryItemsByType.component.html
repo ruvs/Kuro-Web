@@ -1,0 +1,20 @@
+﻿<!-- panel body -->
+<div id="accordion_{{participantLibraryTypeKey}}" class="panel-collapse collapse in">
+    <div class="panel-body">
+        <table>
+            <tr *ngFor="let pli of participantLibraryItems">
+                <td><img src="/images/flags/country/16/{{ pli.Iso2Code }}.png" /></td>
+                <td>
+                    <a [routerLink]="['/participantLibrary', pli.NexusKey]">
+                        {{pli.DisplayCode}}
+                    </a>
+                </td>
+                <td>
+                    <a [routerLink]="['/participantLibrary', pli.NexusKey]">
+                        {{pli.DisplayName}}
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

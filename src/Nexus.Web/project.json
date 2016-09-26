@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
@@ -9,7 +9,11 @@
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-    "Nexus.ParticipantLibrary.Middleware": "1.0.21"
+    "Nexus.ParticipantLibrary.ApiContract": "1.0.81",
+    "Nexus.ParticipantLibrary.Core": "1.0.81",
+    "Nexus.ParticipantLibrary.Data": "1.0.81",
+    "Nexus.ParticipantLibrary.Middleware": "1.0.81",
+    "NLog": "4.3.7"
   },
 
   "tools": {
@@ -17,7 +21,7 @@
   },
 
   "frameworks": {
-    "net461": {}
+    "net462": {}
   },
 
   "buildOptions": {
