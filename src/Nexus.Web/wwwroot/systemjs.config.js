@@ -6,16 +6,19 @@
     // map tells the System loader where to look for things
     var map = {
         'app': 'app', // 'dist',
-        '@angular': 'lib/@angular',
-        'rxjs': 'lib/rxjs',
-        '@angular/router': 'lib/@angular/router/bundles',
+
+        // angular bundles
+        '@angular/core': 'lib/@angular/core/bundles',
+        '@angular/common': 'lib/@angular/common/bundles',
+        '@angular/compiler': 'lib/@angular/compiler/bundles',
         '@angular/platform-browser': 'lib/@angular/platform-browser/bundles',
         '@angular/platform-browser-dynamic': 'lib/@angular/platform-browser-dynamic/bundles',
-        '@angular/core': 'lib/@angular/core/bundles',
         '@angular/http': 'lib/@angular/http/bundles',
-        '@angular/common': 'lib/@angular/common/bundles',
-        '@angular/compiler': 'lib/@angular/compiler/bundles'
+        '@angular/router': 'lib/@angular/router/bundles',
+        '@angular/forms': 'lib/@angular/forms/bundles',
 
+        // other libraries
+        'rxjs': 'lib/rxjs'
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
@@ -32,6 +35,7 @@
       'router',
       'router-deprecated',
       'upgrade',
+       'forms'
     ];
     // Individual files (~300 requests):
     function packIndex(pkgName) {

@@ -1,22 +1,17 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { IParticipantLibraryItem } from './participantLibraryItem';
 import { IParticipantLibraryItemType } from './participantLibraryItemType';
 import { ParticipantLibraryService } from './participantLibrary.service';
 
-import { ParticipantLibraryItemsByTypeComponent } from './participantLibraryItemsByType.component';
-
-
 @Component({
     selector: 'participantLibraryList',
     templateUrl: 'app/participantLibrary/participantLibraryList.component.html',
-    directives: [ROUTER_DIRECTIVES, ParticipantLibraryItemsByTypeComponent],
 })
 export class ParticipantLibraryListComponent implements OnInit {
     pageTitle: string = 'Participant Library List';
     errorMessage: string;
-    //participantLibraryItems: IParticipantLibraryItem[];
     participantLibraryItemTypes: IParticipantLibraryItemType[];
 
     constructor(private router: Router,

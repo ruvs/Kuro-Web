@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { IParticipantLibraryItem } from './participantLibraryItem';
 import { IParticipantLibraryItemType } from './participantLibraryItemType';
@@ -8,7 +8,6 @@ import { ParticipantLibraryService } from './participantLibrary.service';
 @Component({
     selector: 'participantLibraryItemsByType',
     templateUrl: 'app/participantLibrary/participantLibraryItemsByType.component.html',
-    directives: [ROUTER_DIRECTIVES]
 })
 export class ParticipantLibraryItemsByTypeComponent implements OnInit {
     @Input('typeKey') participantLibraryTypeKey: string;

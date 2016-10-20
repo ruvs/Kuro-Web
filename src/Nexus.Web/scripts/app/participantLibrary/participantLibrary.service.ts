@@ -4,10 +4,11 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 import { IParticipantLibraryItem } from './participantLibraryItem';
 import { IParticipantLibraryItemType } from './participantLibraryItemType';
-import { AppConstants } from './../helpers/appConstants';
+import { AppConstants } from '../shared/appConstants';
 
 @Injectable()
 export class ParticipantLibraryService {

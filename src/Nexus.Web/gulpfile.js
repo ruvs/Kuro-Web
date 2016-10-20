@@ -24,7 +24,8 @@ gulp.task('copy:lib', ['clean'], function () {
         "core-js",
         "zone.js",
         "reflect-metadata",
-        "rxjs"
+        "rxjs",
+        "typescript"
     ];
 
     var promises = [];
