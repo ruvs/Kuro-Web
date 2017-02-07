@@ -9,10 +9,10 @@
     "Microsoft.Extensions.Configuration.Json": "1.1.0",
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-    "Nexus.ParticipantLibrary.ApiContract": "1.0.94",
-    "Nexus.ParticipantLibrary.Core": "1.0.94",
-    "Nexus.ParticipantLibrary.Data": "1.0.94",
-    "Nexus.ParticipantLibrary.Middleware": "1.0.94",
+    "Nexus.ParticipantLibrary.ApiContract": "1.0.96",
+    "Nexus.ParticipantLibrary.Core": "1.0.96",
+    "Nexus.ParticipantLibrary.Data": "1.0.96",
+    "Nexus.ParticipantLibrary.Middleware": "1.0.96",
     "NLog": "4.4.1"
   },
 

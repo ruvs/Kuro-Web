@@ -76,7 +76,7 @@ namespace Nexus.Web
 
             app.Run(ctx =>
             {
-                ctx.Response.Redirect("/index.html");
+                //ctx.Response.Redirect("/index.html");
                 return Task.FromResult(0);
             });
 
