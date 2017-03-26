@@ -14,6 +14,8 @@ using Nexus.ParticipantLibrary.Core.Logging;
 using Nexus.ParticipantLibrary.Core.Configuration;
 using Nexus.ParticipantLibrary.Data._Config;
 using Nexus.Web.Infrastructure;
+using MassTransit;
+using System;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace Nexus.Web
@@ -80,19 +82,7 @@ namespace Nexus.Web
                 return Task.FromResult(0);
             });
 
-            //var logWriter = new EndorsementCatalogLogger();
             //var claimsPrincipalResolver = new ClaimsPrincipalResolver();
-
-            //BootStrapEndorsementCatalogLibrary(logWriter, claimsPrincipalResolver);
-            //BootStrapDocFactory(logWriter);
-
-            //BootStrapApplicabilityQueryEngine(logWriter);
-            //BootStrapApplicabilityConfigEngine(logWriter);
-
-            //app.Map("/api/endorsement", endorsementCatalogLibraryApp =>
-            //    endorsementCatalogLibraryApp.UseEndorsementCatalogLibraryCore(_catalogLibrary,
-            //        logWriter));
-
 
             //app.Run(async (context) =>
             //{
@@ -108,7 +98,10 @@ namespace Nexus.Web
                 CorsOrigins = appSettings.Value.CorsOrigins,
                 IncludeErrorDetailPolicy = appSettings.Value.IncludeErrorDetailPolicy,
                 ConnectionString_ParticipantLibrary_Read = appSettings.Value.ConnectionString_ParticipantLibrary_Read,
-                ConnectionString_ParticipantLibrary_Write = appSettings.Value.ConnectionString_ParticipantLibrary_Write
+                ConnectionString_ParticipantLibrary_Write = appSettings.Value.ConnectionString_ParticipantLibrary_Write,
+                RabbitMqHostUri = appSettings.Value.RabbitMqHostUri,
+                RabbitMqUser = appSettings.Value.RabbitMqUser,
+                SignalRNotificationServiceQueue = appSettings.Value.SignalRNotificationServiceQueue,
             };
             return participantLibraryAppSettings;
         }
@@ -119,6 +112,7 @@ namespace Nexus.Web
             participantLibrary = ParticipantLibraryConfigure
                 .Init()
                 .With(logWriter)
+                .With(ConfigureBus())
                 .EfPersistence()
                 .WithConnectionStrings(participantLibraryAppSettings.ConnectionString_ParticipantLibrary_Read, participantLibraryAppSettings.ConnectionString_ParticipantLibrary_Write)
                 //.With(claimsPrincipalResolver)
@@ -136,5 +130,20 @@ namespace Nexus.Web
             }
         }
 
+        private static IPublishEndpoint ConfigureBus()
+        {
+            string _rabbitMqSignalRServiceQueue = participantLibraryAppSettings.SignalRNotificationServiceQueue;
+
+            var bus = Bus.Factory.CreateUsingRabbitMq(cfg =>
+            {
+                var host = cfg.Host(new Uri(participantLibraryAppSettings.RabbitMqHostUri), hst =>
+                {
+                    hst.Username(participantLibraryAppSettings.RabbitMqUser);
+                    hst.Password(participantLibraryAppSettings.RabbitMqUser);
+                });
+            });
+
+            return bus;
+        }
     }
 }

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "MassTransit.RabbitMQ": "3.5.5",
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
     "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
     "Microsoft.AspNetCore.Owin": "1.1.0",
@@ -9,10 +10,11 @@
     "Microsoft.Extensions.Configuration.Json": "1.1.0",
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-    "Nexus.ParticipantLibrary.ApiContract": "1.0.96",
-    "Nexus.ParticipantLibrary.Core": "1.0.96",
-    "Nexus.ParticipantLibrary.Data": "1.0.96",
-    "Nexus.ParticipantLibrary.Middleware": "1.0.96",
+    "Nexus.ParticipantLibrary.ApiContract": "1.0.100",
+    "Nexus.ParticipantLibrary.Core": "1.0.100",
+    "Nexus.ParticipantLibrary.Data": "1.0.100",
+    "Nexus.ParticipantLibrary.Messages": "1.0.100",
+    "Nexus.ParticipantLibrary.Middleware": "1.0.100",
     "NLog": "4.4.1"
   },
 
@@ -21,7 +23,11 @@
   },
 
   "frameworks": {
-    "net462": {}
+    "net462": {
+      "frameworkAssemblies": {
+        "System.Configuration": "4.0.0.0"
+      }
+    }
   },
 
   "buildOptions": {
